@@ -1,0 +1,20 @@
+{
+    "name": "michalkortas/calendar-service",
+    "description": "Calendar Service",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Michal Kortas",
+            "email": "michal@webroad.pl"
+        }
+    ],
+    "php": ">=7.4.0",
+    "minimum-stability": "stable",
+    "autoload": {
+        "psr-4": {"michalkortas\\CalendarService\\": "src/"}
+    },
+    "require-dev": {
+        "pestphp/pest": "^1.18"
+    }
+}
