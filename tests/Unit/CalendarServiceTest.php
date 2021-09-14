@@ -45,6 +45,21 @@ it('returns array with date Y-m-j as key', function() {
     expect(array_key_exists('2021-12-1', $calendar))->toBe(true);
 });
 
+it('returns one day array for the same from-to dates without time', function() {
+    $calendar = CalendarService::prepareCalendar('2021-12-1', '2021-12-1');
+    $this->assertCount(1, $calendar);
+});
+
+it('returns one day array for the same from-to dates with the same time', function() {
+    $calendar = CalendarService::prepareCalendar('2021-12-1 01:30', '2021-12-1 01:30');
+    $this->assertCount(1, $calendar);
+});
+
+it('returns one day array for the same from-to dates with different time', function() {
+    $calendar = CalendarService::prepareCalendar('2021-12-1 01:30', '2021-12-1 02:30');
+    $this->assertCount(1, $calendar);
+});
+
 it('throws Exception when one of date doesnt exists', function() {
     CalendarService::prepareCalendar('2021-12-30', '2021-12-35');
 })->throws(\Exception::class);
