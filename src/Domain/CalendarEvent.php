@@ -43,11 +43,11 @@ class CalendarEvent
     /**
      * @var string
      */
-    private $from_time;
+    public $from_time;
     /**
      * @var string
      */
-    private $to_time;
+    public $to_time;
 
     public function __construct(
         $from = null,
