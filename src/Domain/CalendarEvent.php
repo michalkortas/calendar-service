@@ -40,6 +40,14 @@ class CalendarEvent
      * @var mixed|null
      */
     public $createdUser;
+    /**
+     * @var string
+     */
+    private $from_time;
+    /**
+     * @var string
+     */
+    private $to_time;
 
     public function __construct(
         $from = null,
@@ -61,6 +69,8 @@ class CalendarEvent
         $this->icon = $icon;
         $this->from = $from;
         $this->to = $to;
+        $this->from_time = $from !== null ? (new \DateTime($from))->format('H:i') : null;
+        $this->to_time = $to !== null ? (new \DateTime($to))->format('H:i') : null;
         $this->createdUser = $createdUser;
     }
 }

@@ -1,4 +1,6 @@
 <?php
+
+use michalkortas\CalendarService\Domain\CalendarEvent;
 use michalkortas\CalendarService\Services\CalendarService;
 
 it('returns current month instance if date is not provided', function() {
