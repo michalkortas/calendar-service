@@ -12,3 +12,9 @@ it('returns valid month instance if date is provided', function() {
 
     expect($instance['monthCode'])->toBe((new DateTime('2021-12-12'))->format('Y-m'));
 });
+
+it('returns valid array keys in month instance', function() {
+    $instance = CalendarService::getMonthInstance();
+
+    expect($instance)->toHaveKeys(['days', 'emptyBegin', 'emptyEnd', 'endTo', 'firstDay', 'isTodayVisible', 'lastDay', 'lastMonth', 'lastMonthCode', 'monthCode', 'monthName', 'nextMonth', 'nextMonthCode', 'startFrom', 'today', 'todayDay', 'year']);
+});
