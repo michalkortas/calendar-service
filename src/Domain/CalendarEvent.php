@@ -48,6 +48,10 @@ class CalendarEvent
      * @var string
      */
     public $to_time;
+    /**
+     * @var mixed|string
+     */
+    public $textColor;
 
     public function __construct(
         $from = null,
@@ -58,6 +62,7 @@ class CalendarEvent
         $descriptionContent = '',
         $url = '#',
         $color = '',
+        $textColor = '',
         $icon = null
     )
     {
@@ -66,6 +71,7 @@ class CalendarEvent
         $this->descriptionContent = $descriptionContent;
         $this->url = $url;
         $this->color = $color;
+        $this->textColor = $textColor;
         $this->icon = $icon;
         $this->from = $from;
         $this->to = $to;
