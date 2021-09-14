@@ -112,8 +112,8 @@ class CalendarService
         $calendar = [];
 
         try {
-            $begin = new DateTime($from);
-            $end = new DateTime($to);
+            $begin = (new DateTime($from))->setTime(0, 0);
+            $end = (new DateTime($to))->setTime(0, 0);
             $end = $end->modify( '+1 day');
 
             $interval = new DateInterval('P1D');
