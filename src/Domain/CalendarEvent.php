@@ -52,6 +52,14 @@ class CalendarEvent
      * @var mixed|string
      */
     public $textColor;
+    /**
+     * @var mixed|null
+     */
+    public $uniqueId;
+    /**
+     * @var mixed|null
+     */
+    public $createdAt;
 
     public function __construct(
         $from = null,
@@ -63,7 +71,9 @@ class CalendarEvent
         $url = '#',
         $color = '',
         $textColor = '',
-        $icon = null
+        $icon = null,
+        $uniqueId = null,
+        $createdAt = null
     )
     {
         $this->title = $title;
@@ -78,5 +88,7 @@ class CalendarEvent
         $this->from_time = $from !== null ? (new \DateTime($from))->format('H:i') : null;
         $this->to_time = $to !== null ? (new \DateTime($to))->format('H:i') : null;
         $this->createdUser = $createdUser;
+        $this->uniqueId = $uniqueId;
+        $this->createdAt = $createdAt;
     }
 }
