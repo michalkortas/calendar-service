@@ -65,4 +65,10 @@ class OnlineCalendarEvent
         $this->uniqueId = $uniqueId;
         $this->createdAt = $createdAt;
     }
+
+    private $statuses = [
+        'accepted',
+        'declined',
+        'needs_action',
+    ];
 }
