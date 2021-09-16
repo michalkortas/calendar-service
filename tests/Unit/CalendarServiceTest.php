@@ -71,3 +71,19 @@ it('returns day names array', function() {
 it('returns month names array', function() {
     expect(CalendarService::$monthNames)->toHaveKeys([1, 2, 3, 4, 5, 6, 7, 9, 10, 11, 12]);
 });
+
+it('returns days array from different months', function() {
+    $calendar = CalendarService::prepareCalendar('2021-08-1 01:30', '2021-09-30 02:30');
+    $this->assertCount(61, $calendar);
+});
+
+it('returns days array from different years with leap year included', function() {
+    $calendar = CalendarService::prepareCalendar('2020-01-01 01:30', '2021-12-31 02:30');
+    ray($calendar);
+    $this->assertCount(2*365 + 1, $calendar);
+});
+
+it('returns days array from different ordinary years', function() {
+    $calendar = CalendarService::prepareCalendar('2021-01-01 01:30', '2022-12-31 02:30');
+    $this->assertCount(2*365, $calendar);
+});
