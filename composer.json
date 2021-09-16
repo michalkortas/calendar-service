@@ -14,7 +14,11 @@
     "autoload": {
         "psr-4": {"michalkortas\\CalendarService\\": "src/"}
     },
+
     "require-dev": {
-        "pestphp/pest": "^1.18"
+        "pestphp/pest": "^1.18",
+        "spatie/ray": "^1.30"
     }
+
+
 }
