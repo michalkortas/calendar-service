@@ -27,11 +27,11 @@ class OnlineCalendarEvent
     /**
      * @var mixed|null
      */
-    public $uniqueId;
+    public $unique_id;
     /**
      * @var mixed|null
      */
-    public $createdAt;
+    public $created_at;
     /**
      * @var array|mixed
      */
@@ -62,13 +62,7 @@ class OnlineCalendarEvent
         $this->to = $to;
         $this->organizer = $organizer;
         $this->attendees = $attendees;
-        $this->uniqueId = $uniqueId;
-        $this->createdAt = $createdAt;
+        $this->unique_id = $uniqueId;
+        $this->created_at = $createdAt;
     }
-
-    private $statuses = [
-        'accepted',
-        'declined',
-        'needs_action',
-    ];
 }

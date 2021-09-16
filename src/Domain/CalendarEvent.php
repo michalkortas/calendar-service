@@ -11,11 +11,11 @@ class CalendarEvent
     /**
      * @var mixed|string
      */
-    public $descriptionTitle;
+    public $description_title;
     /**
      * @var mixed|string
      */
-    public $descriptionContent;
+    public $description_content;
     /**
      * @var mixed|string
      */
@@ -27,11 +27,11 @@ class CalendarEvent
     /**
      * @var mixed|string
      */
-    public $urlEdit;
+    public $url_edit;
     /**
      * @var mixed|string
      */
-    public $urlShow;
+    public $url_show;
     /**
      * @var mixed|null
      */
@@ -43,7 +43,7 @@ class CalendarEvent
     /**
      * @var mixed|null
      */
-    public $createdUser;
+    public $created_user;
     /**
      * @var string
      */
@@ -55,15 +55,15 @@ class CalendarEvent
     /**
      * @var mixed|string
      */
-    public $textColor;
+    public $text_color;
     /**
      * @var mixed|null
      */
-    public $uniqueId;
+    public $unique_id;
     /**
      * @var mixed|null
      */
-    public $createdAt;
+    public $created_at;
     /**
      * @var mixed|null
      */
@@ -87,20 +87,20 @@ class CalendarEvent
     )
     {
         $this->title = $title;
-        $this->descriptionTitle = $descriptionTitle;
-        $this->descriptionContent = $descriptionContent;
-        $this->urlEdit = $urlEdit;
-        $this->urlShow = $urlShow;
+        $this->description_title = $descriptionTitle;
+        $this->description_content = $descriptionContent;
+        $this->url_edit = $urlEdit;
+        $this->url_show = $urlShow;
         $this->color = $color;
-        $this->textColor = $textColor;
+        $this->text_color = $textColor;
         $this->icon = $icon;
         $this->from = $from;
         $this->to = $to;
         $this->from_time = $from !== null ? (new \DateTime($from))->format('H:i') : null;
         $this->to_time = $to !== null ? (new \DateTime($to))->format('H:i') : null;
-        $this->createdUser = $createdUser;
-        $this->uniqueId = $uniqueId;
-        $this->createdAt = $createdAt;
+        $this->created_user = $createdUser;
+        $this->unique_id = $uniqueId;
+        $this->created_at = $createdAt;
         $this->origin = $origin;
     }
 }
