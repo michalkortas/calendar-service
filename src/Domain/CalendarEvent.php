@@ -27,7 +27,11 @@ class CalendarEvent
     /**
      * @var mixed|string
      */
-    public $url;
+    public $urlEdit;
+    /**
+     * @var mixed|string
+     */
+    public $urlShow;
     /**
      * @var mixed|null
      */
@@ -60,6 +64,10 @@ class CalendarEvent
      * @var mixed|null
      */
     public $createdAt;
+    /**
+     * @var mixed|null
+     */
+    public $origin;
 
     public function __construct(
         $from = null,
@@ -68,18 +76,21 @@ class CalendarEvent
         $title = '',
         $descriptionTitle = '',
         $descriptionContent = '',
-        $url = '#',
+        $urlEdit = '#',
+        $urlShow = '#',
         $color = '',
         $textColor = '',
         $icon = null,
         $uniqueId = null,
-        $createdAt = null
+        $createdAt = null,
+        $origin = null
     )
     {
         $this->title = $title;
         $this->descriptionTitle = $descriptionTitle;
         $this->descriptionContent = $descriptionContent;
-        $this->url = $url;
+        $this->urlEdit = $urlEdit;
+        $this->urlShow = $urlShow;
         $this->color = $color;
         $this->textColor = $textColor;
         $this->icon = $icon;
@@ -90,5 +101,6 @@ class CalendarEvent
         $this->createdUser = $createdUser;
         $this->uniqueId = $uniqueId;
         $this->createdAt = $createdAt;
+        $this->origin = $origin;
     }
 }
