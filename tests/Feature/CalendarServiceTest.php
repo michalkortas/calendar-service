@@ -20,3 +20,9 @@ it('returns valid array keys in month instance', function() {
 
     expect($instance)->toHaveKeys(['days', 'emptyBegin', 'emptyEnd', 'endTo', 'firstDay', 'isTodayVisible', 'lastDay', 'lastMonth', 'lastMonthCode', 'monthCode', 'monthName', 'nextMonth', 'nextMonthCode', 'startFrom', 'today', 'todayDay', 'year']);
 });
+
+it('returns valid day keys in day instance', function() {
+    $instance = CalendarService::getDayInstance();
+
+    expect($instance)->toHaveKeys(['dayName', 'nextName', 'lastName', 'year', 'today', 'todayDay', 'nextDay', 'lastDay']);
+});

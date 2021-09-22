@@ -65,7 +65,7 @@ it('throws Exception when one of date doesnt exists', function() {
 })->throws(\Exception::class);
 
 it('returns day names array', function() {
-    expect(CalendarService::$dayNames)->toHaveKeys([0, 1, 2, 3, 4, 5, 6]);
+    expect(CalendarService::$dayNames)->toHaveKeys([1, 2, 3, 4, 5, 6, 7]);
 });
 
 it('returns month names array', function() {

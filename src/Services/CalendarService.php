@@ -46,6 +46,29 @@ class CalendarService
         ];
     }
 
+    public static function getDayInstance(\DateTime $date = null): array
+    {
+        if($date === null) {
+            $date = new \DateTime();
+        }
+
+        $today = new \DateTime();
+
+        $nextDay = (clone $date)->modify('next day');
+        $lastDay = (clone $date)->modify('last day');
+
+        return [
+            'dayName' => self::$dayNames[(clone $today)->format('N')],
+            'nextName' => self::$dayNames[(clone $nextDay)->format('N')],
+            'lastName' => self::$dayNames[(clone $lastDay)->format('N')],
+            'year' => (int)(clone $today)->format('Y'),
+            'today' => (clone $today)->format('Y-m-d'),
+            'todayDay' => (clone $today)->format('j'),
+            'nextDay' => (clone $nextDay)->format('Y-m-d'),
+            'lastDay' => (clone $lastDay)->format('Y-m-d'),
+        ];
+    }
+
     public static function getEmptyBeginDays(\DateTime $firstDay) {
         $weekDay = $firstDay->format('w');
 
@@ -67,13 +90,13 @@ class CalendarService
     }
 
     public static $dayNames = [
-        0 => 'Niedziela',
         1 => 'Poniedziałek',
         2 => 'Wtorek',
         3 => 'Środa',
         4 => 'Czwartek',
         5 => 'Piątek',
         6 => 'Sobota',
+        7 => 'Niedziela',
     ];
 
     public static $monthNames = [
