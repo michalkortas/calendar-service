@@ -58,16 +58,17 @@ class CalendarService
         $lastDay = (clone $date)->modify('last day');
 
         return [
-            'dayName' => self::$dayNames[(clone $today)->format('N')],
+            'dayName' => self::$dayNames[(clone $date)->format('N')],
             'nextName' => self::$dayNames[(clone $nextDay)->format('N')],
             'lastName' => self::$dayNames[(clone $lastDay)->format('N')],
-            'year' => (int)(clone $today)->format('Y'),
-            'today' => (clone $today)->format('Y-m-d'),
-            'todayDay' => (clone $today)->format('j'),
-            'nextDay' => (clone $nextDay)->format('Y-m-d'),
-            'lastDay' => (clone $lastDay)->format('Y-m-d'),
-            'startFrom' => (clone $today)->format('Y-m-d 00:00:00'),
-            'endTo' => (clone $today)->format('Y-m-d 23:59:59'),
+            'year' => (int)(clone $date)->format('Y'),
+            'today' => (clone $today)->format('Y-m-j'),
+            'todayDay' => (clone $date)->format('j'),
+            'currentDay' => (clone $date)->format('Y-m-j'),
+            'nextDay' => (clone $nextDay)->format('Y-m-j'),
+            'lastDay' => (clone $lastDay)->format('Y-m-j'),
+            'startFrom' => (clone $date)->format('Y-m-d 00:00:00'),
+            'endTo' => (clone $date)->format('Y-m-d 23:59:59'),
         ];
     }
 
