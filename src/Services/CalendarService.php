@@ -67,7 +67,7 @@ class CalendarService
             'nextDay' => (clone $nextDay)->format('Y-m-d'),
             'lastDay' => (clone $lastDay)->format('Y-m-d'),
             'startFrom' => (clone $today)->format('Y-m-d 00:00:00'),
-            'endTo' => (clone $lastDay)->format('Y-m-d 23:59:59'),
+            'endTo' => (clone $today)->format('Y-m-d 23:59:59'),
         ];
     }
 
