@@ -24,5 +24,5 @@ it('returns valid array keys in month instance', function() {
 it('returns valid day keys in day instance', function() {
     $instance = CalendarService::getDayInstance();
 
-    expect($instance)->toHaveKeys(['dayName', 'nextName', 'lastName', 'year', 'today', 'todayDay', 'nextDay', 'lastDay']);
+    expect($instance)->toHaveKeys(['dayName', 'nextName', 'lastName', 'year', 'today', 'todayDay', 'nextDay', 'lastDay', 'startFrom', 'endTo']);
 });
