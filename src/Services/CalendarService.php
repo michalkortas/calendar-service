@@ -6,6 +6,7 @@ use DateInterval;
 use DatePeriod;
 use DateTime;
 use http\Exception;
+use phpDocumentor\Reflection\Types\Self_;
 
 class CalendarService
 {
@@ -102,6 +103,16 @@ class CalendarService
         7 => 'Niedziela',
     ];
 
+    public static $dayCodes = [
+        1 => 'monday',
+        2 => 'tuesday',
+        3 => 'wednesday',
+        4 => 'thursday',
+        5 => 'friday',
+        6 => 'saturday',
+        7 => 'sunday',
+    ];
+
     public static $monthNames = [
         1 => 'Styczeń',
         2 => 'Luty',
@@ -155,6 +166,11 @@ class CalendarService
         }
 
         return $calendar;
+    }
+
+    public static function getValidWeekDays(array $weekDays) : array
+    {
+        return $weekDays;
     }
 
 }
