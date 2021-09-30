@@ -5,8 +5,6 @@ namespace michalkortas\CalendarService\Services;
 use DateInterval;
 use DatePeriod;
 use DateTime;
-use http\Exception;
-use phpDocumentor\Reflection\Types\Self_;
 
 class CalendarService
 {
