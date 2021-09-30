@@ -37,7 +37,6 @@ class RecurringService
     /**
      * @param DatePeriod $period
      * @param RecurringTypeInterface $recurring
-     * @param array $days
      * @return array
      */
     private static function getDays(DatePeriod $period, RecurringTypeInterface $recurring): array
