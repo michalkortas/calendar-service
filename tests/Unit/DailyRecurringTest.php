@@ -30,8 +30,6 @@ test('it recurring every 2 days expect today', function () {
 
     $recurring = new DailyRecurring($event, $stopRecurring, 2);
 
-    ray($recurring->getDays());
-
     expect($recurring->getDays())->toHaveCount(6);
 });
 
@@ -48,4 +46,29 @@ test('it recurring every day expect today', function () {
     $recurring = new DailyRecurring($event, $stopRecurring, 1);
 
     expect($recurring->getDays())->toHaveCount(13);
+});
+
+test('it return origin of daily event', function () {
+    $eventFrom = new DateTime('wednesday this week');
+    $eventTo = (new DateTime('wednesday this week'))->modify('+2 hours');
+    $stopRecurring = (new DateTime('wednesday this week'))->modify('+14 days');
+
+    $event = new CalendarEvent(
+        $eventFrom->format('Y-m-d H:i'),
+        $eventTo->format('Y-m-d H:i')
+    );
+
+    $recurring = new DailyRecurring($event, $stopRecurring, 1);
+
+    $originArray = [
+        $recurring->getOrigin()->from->format('YmdHis'),
+        $recurring->getOrigin()->to->format('YmdHis'),
+    ];
+
+    $eventArray = [
+        $eventFrom->format('YmdHis'),
+        $eventTo->format('YmdHis'),
+    ];
+
+    expect($originArray)->toEqual($eventArray);
 });

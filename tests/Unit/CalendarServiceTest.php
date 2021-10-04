@@ -79,7 +79,6 @@ it('returns days array from different months', function() {
 
 it('returns days array from different years with leap year included', function() {
     $calendar = CalendarService::prepareCalendar('2020-01-01 01:30', '2021-12-31 02:30');
-    ray($calendar);
     $this->assertCount(2*365 + 1, $calendar);
 });
 

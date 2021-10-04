@@ -45,7 +45,30 @@ test('it recurring every year expect today', function () {
 
     $recurring = new YearlyRecurring($event, $stopRecurring, 1);
 
-    ray($recurring->getDays());
-
     expect($recurring->getDays())->toHaveCount(5);
+});
+
+test('it return origin of yearly event', function () {
+    $eventFrom = new DateTime('wednesday this week');
+    $eventTo = (new DateTime('wednesday this week'))->modify('+2 hours');
+    $stopRecurring = (new DateTime('wednesday this week'))->modify('+14 days');
+
+    $event = new CalendarEvent(
+        $eventFrom->format('Y-m-d H:i'),
+        $eventTo->format('Y-m-d H:i')
+    );
+
+    $recurring = new YearlyRecurring($event, $stopRecurring, 1);
+
+    $originArray = [
+        $recurring->getOrigin()->from->format('YmdHis'),
+        $recurring->getOrigin()->to->format('YmdHis'),
+    ];
+
+    $eventArray = [
+        $eventFrom->format('YmdHis'),
+        $eventTo->format('YmdHis'),
+    ];
+
+    expect($originArray)->toEqual($eventArray);
 });

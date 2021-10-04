@@ -4,6 +4,7 @@ namespace michalkortas\CalendarService\Interfaces;
 use DateInterval;
 use DateTime;
 use michalkortas\CalendarService\Domain\CalendarEvent;
+use michalkortas\CalendarService\Domain\EventRange;
 
 interface RecurringTypeInterface
 {
@@ -15,5 +16,6 @@ interface RecurringTypeInterface
     public function getWeekDays() : array;
     public function getType() : string;
     public function getDays() : array;
+    public function getOrigin() : EventRange;
     public function getEvent() : CalendarEvent;
 }
