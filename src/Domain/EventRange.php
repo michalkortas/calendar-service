@@ -4,8 +4,8 @@ namespace michalkortas\CalendarService\Domain;
 
 class EventRange
 {
-    public $to;
     public $from;
+    public $to;
 
     public function __construct(string $from, string $to)
     {

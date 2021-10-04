@@ -128,4 +128,12 @@ class MonthlyRecurring implements RecurringTypeInterface
     {
         return RecurringService::getRecurring($this);
     }
+
+    /**
+     * @return EventRange
+     */
+    public function getOrigin(): EventRange
+    {
+        return new EventRange($this->event->from, $this->event->to);
+    }
 }

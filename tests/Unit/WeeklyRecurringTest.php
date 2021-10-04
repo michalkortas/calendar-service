@@ -30,8 +30,6 @@ test('it recurring one in two weeks', function () {
 
     $recurring = new WeeklyRecurring($event, $stopRecurring, 1);
 
-    ray($recurring->getDays());
-
     expect($recurring->getDays())->toHaveCount(1);
 });
 
@@ -108,4 +106,29 @@ test('it recurring every weekday', function () {
     $recurring = new WeeklyRecurring($event, $stopRecurring, 1, [1, 2, 3, 4, 5, 6, 7]);
 
     expect($recurring->getDays())->toHaveCount(14);
+});
+
+test('it return origin of weekly event', function () {
+    $eventFrom = new DateTime('wednesday this week');
+    $eventTo = (new DateTime('wednesday this week'))->modify('+2 hours');
+    $stopRecurring = (new DateTime('wednesday this week'))->modify('+14 days');
+
+    $event = new CalendarEvent(
+        $eventFrom->format('Y-m-d H:i'),
+        $eventTo->format('Y-m-d H:i')
+    );
+
+    $recurring = new WeeklyRecurring($event, $stopRecurring, 1);
+
+    $originArray = [
+        $recurring->getOrigin()->from->format('YmdHis'),
+        $recurring->getOrigin()->to->format('YmdHis'),
+    ];
+
+    $eventArray = [
+        $eventFrom->format('YmdHis'),
+        $eventTo->format('YmdHis'),
+    ];
+
+    expect($originArray)->toEqual($eventArray);
 });
