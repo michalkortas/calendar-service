@@ -16,6 +16,7 @@ interface RecurringTypeInterface
     public function getWeekDays() : array;
     public function getType() : string;
     public function getDays() : array;
+    public function getExcludedDays() : array;
     public function getOrigin() : EventRange;
     public function getEvent() : CalendarEvent;
 }

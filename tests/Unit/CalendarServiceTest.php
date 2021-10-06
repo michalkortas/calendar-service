@@ -86,3 +86,39 @@ it('returns days array from different ordinary years', function() {
     $calendar = CalendarService::prepareCalendar('2021-01-01 01:30', '2022-12-31 02:30');
     $this->assertCount(2*365, $calendar);
 });
+
+it('returns array with dates from array with dateTimes', function () {
+   $dateTimes = [
+       '2021-01-01 12:35',
+       '2021-09-01 00:00:01',
+   ];
+
+   $parsed = CalendarService::parseArrayValuesToDate($dateTimes);
+
+   $expected = [
+       '2021-01-01',
+       '2021-09-01',
+   ];
+
+   expect($parsed)->toEqual($expected);
+});
+
+it('skips invalid dateTime when parse to date', function () {
+    $dateTimes = [
+        '2021-13-01 12:35',
+        '2021-12-01 00:00',
+    ];
+
+    $parsed = CalendarService::parseArrayValuesToDate($dateTimes);
+
+    $expected = [
+        '2021-12-01',
+    ];
+
+    expect($parsed)->toEqual($expected);
+});
+
+it('returns empty array when there is no datetimes', function () {
+    $parsed = CalendarService::parseArrayValuesToDate([]);
+    expect($parsed)->toEqual([]);
+});

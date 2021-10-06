@@ -17,6 +17,7 @@ class EventRecurring
         \DateTime $stopRecurring,
         int $interval = 0,
         array $weekDays = [],
+        array $excludedDays = [],
         \DateTime $startRecurringDate = null
     ): DailyRecurring
     {
@@ -24,7 +25,7 @@ class EventRecurring
             $eventFrom, $eventTo, $stopRecurring
         );
 
-        return new DailyRecurring($baseEvent, $stopRecurringDate, $interval, $weekDays, $startRecurringDate);
+        return new DailyRecurring($baseEvent, $stopRecurringDate, $interval, $weekDays, $excludedDays);
     }
 
     public static function getWeeklyRecurring(
@@ -33,6 +34,7 @@ class EventRecurring
         \DateTime $stopRecurring,
         int $interval = 0,
         array $weekDays = [],
+        array $excludedDays = [],
         \DateTime $startRecurringDate = null
     ): WeeklyRecurring
     {
@@ -40,7 +42,7 @@ class EventRecurring
             $eventFrom, $eventTo, $stopRecurring
         );
 
-        return new WeeklyRecurring($baseEvent, $stopRecurringDate, $interval, $weekDays, $startRecurringDate);
+        return new WeeklyRecurring($baseEvent, $stopRecurringDate, $interval, $weekDays, $excludedDays, $startRecurringDate);
     }
 
     public static function getMonthlyRecurring(
@@ -49,6 +51,7 @@ class EventRecurring
         \DateTime $stopRecurring,
         int $interval = 0,
         array $weekDays = [],
+        array $excludedDays = [],
         \DateTime $startRecurringDate = null
     ): MonthlyRecurring
     {
@@ -56,7 +59,7 @@ class EventRecurring
             $eventFrom, $eventTo, $stopRecurring
         );
 
-        return new MonthlyRecurring($baseEvent, $stopRecurringDate, $interval, $weekDays, $startRecurringDate);
+        return new MonthlyRecurring($baseEvent, $stopRecurringDate, $interval, $weekDays, $excludedDays, $startRecurringDate);
     }
 
     public static function getYearlyRecurring(
@@ -65,6 +68,7 @@ class EventRecurring
         \DateTime $stopRecurring,
         int $interval = 0,
         array $weekDays = [],
+        array $excludedDays = [],
         \DateTime $startRecurringDate = null
     ): YearlyRecurring
     {
@@ -72,7 +76,7 @@ class EventRecurring
             $eventFrom, $eventTo, $stopRecurring
         );
 
-        return new YearlyRecurring($baseEvent, $stopRecurringDate, $interval, $weekDays, $startRecurringDate);
+        return new YearlyRecurring($baseEvent, $stopRecurringDate, $interval, $weekDays, $excludedDays, $startRecurringDate);
     }
 
     /**

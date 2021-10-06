@@ -173,4 +173,19 @@ class CalendarService
         return $weekDays;
     }
 
+    public static function parseArrayValuesToDate(array $datetimeArray): array
+    {
+        $dates = [];
+
+        foreach ($datetimeArray ?? [] as $datetime) {
+            try {
+                $dates[] = (new DateTime($datetime))->format('Y-m-d');
+            } catch (\Throwable $e) {
+                continue;
+            }
+        }
+
+        return $dates;
+    }
+
 }

@@ -30,12 +30,17 @@ class WeeklyRecurring implements RecurringTypeInterface
      * @var CalendarEvent
      */
     private $event;
+    /**
+     * @var array
+     */
+    private $excludedDays;
 
     public function __construct(
             CalendarEvent $event,
             DateTime $stopDate = null,
             int $interval = 0,
             array $weekDays = [],
+            array $excludedDays = [],
             DateTime $startDate = null
         ) {
 
@@ -43,6 +48,7 @@ class WeeklyRecurring implements RecurringTypeInterface
         $this->stopDate = $stopDate;
         $this->interval = $interval;
         $this->weekDays = $weekDays;
+        $this->excludedDays = $excludedDays;
         $this->event = $event;
     }
 
@@ -135,5 +141,13 @@ class WeeklyRecurring implements RecurringTypeInterface
     public function getOrigin(): EventRange
     {
         return new EventRange($this->event->from, $this->event->to);
+    }
+
+    /**
+     * @return array
+     */
+    public function getExcludedDays(): array
+    {
+        return CalendarService::parseArrayValuesToDate($this->excludedDays ?? []);
     }
 }

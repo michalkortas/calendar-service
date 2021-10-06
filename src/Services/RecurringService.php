@@ -51,7 +51,8 @@ class RecurringService
                     $datetime <= $recurring->getStopDate()) {
                     $day = (clone $datetime)->format('Y-m-d');
 
-                    $days[$day] = self::getEventRange($day, $recurring);
+                    if(!in_array($day, $recurring->getExcludedDays()))
+                        $days[$day] = self::getEventRange($day, $recurring);
                 }
 
             } else {
@@ -64,7 +65,8 @@ class RecurringService
                         $weekDayDateTime <= $recurring->getStopDate()) {
                         $day = (clone $weekDayDateTime)->format('Y-m-d');
 
-                        $days[$day] = self::getEventRange($day, $recurring);
+                        if(!in_array($day, $recurring->getExcludedDays()))
+                            $days[$day] = self::getEventRange($day, $recurring);
                     }
                 }
 
