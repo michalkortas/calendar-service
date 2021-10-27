@@ -44,6 +44,8 @@ class CalendarService
             'firstDayDateTime' => (clone $firstDay)->format('Y-m-d 00:00:00'),
             'lastDayDateTime' => (clone $lastDay)->format('Y-m-d 23:59:59'),
             'monthCode' => (clone $firstDay)->format('Y-m'),
+            'monthNumber' => (clone $firstDay)->format('m'),
+            'daysInstances' => self::getDaysInstances($firstDay, $lastDay)
         ];
     }
 
@@ -186,6 +188,24 @@ class CalendarService
         }
 
         return $dates;
+    }
+
+    private static function getDaysInstances(DateTime $firstDay, DateTime $lastDay)
+    {
+        $days = [];
+
+        $firstDay->setTime(0, 0);
+        $lastDay->setTime(0, 1);
+
+        $interval = new DateInterval('P1D');
+        $period = new DatePeriod($firstDay, $interval, $lastDay);
+
+        foreach ($period as $date) {
+            $day = new \DateTime((clone $date)->format('Y-m-d'));
+            $days[(clone $date)->format('j')] = self::getDayInstance($day);
+        }
+
+        return $days;
     }
 
 }
