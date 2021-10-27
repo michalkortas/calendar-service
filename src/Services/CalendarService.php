@@ -68,8 +68,13 @@ class CalendarService
             'currentDay' => (clone $date)->format('Y-m-j'),
             'nextDay' => (clone $nextDay)->format('Y-m-j'),
             'lastDay' => (clone $lastDay)->format('Y-m-j'),
-            'startFrom' => (clone $date)->format('Y-m-d 00:00:00'),
-            'endTo' => (clone $date)->format('Y-m-d 23:59:59'),
+            'startFrom' => (clone $date)->setTime(0, 0)->format('Y-m-d H:i:s'),
+            'endTo' => (clone $date)->setTime(23, 59, 59)->format('Y-m-d H:i:s'),
+            'dayNumber' => (clone $date)->format('d'),
+            'isWorkingDay' => HolidayService::isWorkingDay($date),
+            'isSaturday' => HolidayService::isSaturday($date),
+            'isSunday' => HolidayService::isSunday($date),
+            'isHoliday' => HolidayService::isHoliday($date),
         ];
     }
 
