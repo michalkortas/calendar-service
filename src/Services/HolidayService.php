@@ -22,18 +22,25 @@ class HolidayService
             '12-26' => 'Boże Narodzenie'
         ];
 
-        $easter = date('m-d', easter_date( $year ));
-        $easterSec = date('m-d', strtotime('+1 day', strtotime( $year . '-' . $easter) ));
-        #boze cialo
-        $cc = date('m-d', strtotime('+60 days', strtotime( $year . '-' . $easter) ));
-        #Zielone Świątki
-        $p = date('m-d', strtotime('+49 days', strtotime( $year . '-' . $easter) ));
+        $spring = (new \DateTime($year . '-03-21'))->setTime(0,0);
+
+        $daysToEasterAfterSpring = easter_days($year);
+
+        $easterDate = (clone $spring)->modify("+$daysToEasterAfterSpring days");
+
+        $easter = (clone $easterDate)->format('m-d');
+
+        $easterSec = (clone $easterDate)->modify('+1 day')->format('m-d');
+
+        $corpusChristi = (clone $easterDate)->modify('+60 days')->format('m-d');
+
+        $pentecost = (clone $easterDate)->modify('+49 days')->format('m-d');
 
         $holidays = $constHolidays;
         $holidays[$easter] = 'Wielkanoc';
         $holidays[$easterSec] = 'Poniedziałek Wielkanocny';
-        $holidays[$cc] = 'Boże Ciało';
-        $holidays[$p] = 'Zielone Świątki';
+        $holidays[$corpusChristi] = 'Boże Ciało';
+        $holidays[$pentecost] = 'Zesłanie Ducha Świętego';
 
         $month = $date->format('m-d');
 
@@ -48,21 +55,43 @@ class HolidayService
 
     public static function isWorkingDay(DateTime $date) {
 
-        $dayOfWeek = $date->format('N');
-
-        $saturday = 6;
-        $sunday = 7;
-
-        if( $dayOfWeek == $saturday || $dayOfWeek == $sunday ) {
+        if ( self::isSaturday($date) || self::isSunday($date) || self::isHoliday($date) ) {
             return false;
         }
 
+        return true;
+    }
+
+    public static function isSaturday(DateTime $date) {
+
+        $dayOfWeek = $date->format('N');
+
+        if( $dayOfWeek == 6 ) {
+            return true;
+        }
+
+        return false;
+    }
+
+    public static function isSunday(DateTime $date) {
+
+        $dayOfWeek = $date->format('N');
+
+        if( $dayOfWeek == 7 ) {
+            return true;
+        }
+
+        return false;
+    }
+
+    public static function isHoliday(DateTime $date) {
+
         $holiday = self::getHoliday($date);
 
-        if($holiday !== null)
-            return false;
+        if ($holiday !== null)
+            return true;
 
-        return true;
+        return false;
     }
 
     public static function countWorkingDays(DateTime $dateFrom, DateTime $dateTo, bool $withStartDay = true) {
