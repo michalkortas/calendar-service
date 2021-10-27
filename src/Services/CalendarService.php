@@ -72,6 +72,10 @@ class CalendarService
             'lastDay' => (clone $lastDay)->format('Y-m-j'),
             'startFrom' => (clone $date)->format('Y-m-d 00:00:00'),
             'endTo' => (clone $date)->format('Y-m-d 23:59:59'),
+            'isWorkingDay' => HolidayService::isWorkingDay($date),
+            'isSaturday' => HolidayService::isSaturday($date),
+            'isSunday' => HolidayService::isSunday($date),
+            'isHoliday' => HolidayService::isHoliday($date),
         ];
     }
 
