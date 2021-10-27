@@ -18,7 +18,8 @@
     "require-dev": {
         "pestphp/pest": "^1.18",
         "spatie/ray": "^1.30"
-    }
-
-
+    },
+  "require": {
+    "ext-calendar": "*"
+  }
 }
