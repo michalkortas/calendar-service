@@ -31,5 +31,5 @@ it('returns valid days instances in month instance', function() {
 it('returns valid day keys in day instance', function() {
     $instance = CalendarService::getDayInstance();
 
-    expect($instance)->toHaveKeys(['dayName', 'weekNumber', 'nextName', 'lastName', 'year', 'today', 'todayDay', 'nextDay', 'lastDay', 'startFrom', 'endTo', 'isWorkingDay', 'isSaturday', 'isSunday', 'isHoliday']);
+    expect($instance)->toHaveKeys(['dayName', 'weekNumber', 'weekDayNumber', 'nextName', 'lastName', 'year', 'today', 'todayDay', 'nextDay', 'lastDay', 'startFrom', 'endTo', 'isWorkingDay', 'isSaturday', 'isSunday', 'isHoliday']);
 });
