@@ -70,6 +70,7 @@ class CalendarService
             'currentDay' => (clone $date)->format('Y-m-j'),
             'nextDay' => (clone $nextDay)->format('Y-m-j'),
             'lastDay' => (clone $lastDay)->format('Y-m-j'),
+            'weekNumber' => (clone $date)->format('W'),
             'startFrom' => (clone $date)->setTime(0, 0)->format('Y-m-d H:i:s'),
             'endTo' => (clone $date)->setTime(23, 59, 59)->format('Y-m-d H:i:s'),
             'dayNumber' => (clone $date)->format('d'),
