@@ -74,6 +74,7 @@ class CalendarService
             'nextDayCode' => (clone $nextDay)->format('Y-m-d'),
             'lastDayCode' => (clone $lastDay)->format('Y-m-d'),
             'monthCode' => (clone $lastDay)->format('Y-m'),
+            'dayCode' => (clone $lastDay)->format('m-d'),
             'weekNumber' => (clone $date)->format('W'),
             'weekDayNumber' => (clone $date)->format('N'),
             'startFrom' => (clone $date)->setTime(0, 0)->format('Y-m-d H:i:s'),
