@@ -44,6 +44,10 @@ class OnlineCalendarEvent
      * @var mixed|string
      */
     public $description;
+    /**
+     * @var false|mixed
+     */
+    public $is_all_day;
 
     public function __construct(
         $from = null,
@@ -53,7 +57,8 @@ class OnlineCalendarEvent
         $organizer = [],
         $attendees = [],
         $uniqueId = null,
-        $createdAt = null
+        $createdAt = null,
+        $isAllDay = false
     )
     {
         $this->title = $title;
@@ -64,5 +69,6 @@ class OnlineCalendarEvent
         $this->attendees = $attendees;
         $this->unique_id = $uniqueId;
         $this->created_at = $createdAt;
+        $this->is_all_day = $isAllDay;
     }
 }
