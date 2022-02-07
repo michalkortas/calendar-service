@@ -32,6 +32,40 @@ it('returns 0 days after sunday in week', function () {
     expect(CalendarService::getEmptyEndDays($day))->toBe(0);
 });
 
+it('returns empty begin days with work days only', function() {
+    $day = new DateTime('01-01-2022');
+    expect(CalendarService::getEmptyBeginDays($day, true))->toBe(5);
+
+    $day = new DateTime('01-02-2022');
+    expect(CalendarService::getEmptyBeginDays($day, true))->toBe(1);
+
+    $day = new DateTime('01-05-2022');
+    expect(CalendarService::getEmptyBeginDays($day, true))->toBe(5);
+
+    $day = new DateTime('01-08-2022');
+    expect(CalendarService::getEmptyBeginDays($day, true))->toBe(0);
+});
+
+it('returns empty end days with work days only', function() {
+    $day = new DateTime('31-01-2022');
+    expect(CalendarService::getEmptyEndDays($day, true))->toBe(4);
+
+    $day = new DateTime('28-02-2022');
+    expect(CalendarService::getEmptyEndDays($day, true))->toBe(4);
+
+    $day = new DateTime('30-04-2022');
+    expect(CalendarService::getEmptyEndDays($day, true))->toBe(0);
+
+    $day = new DateTime('31-05-2022');
+    expect(CalendarService::getEmptyEndDays($day, true))->toBe(3);
+
+    $day = new DateTime('31-08-2022');
+    expect(CalendarService::getEmptyEndDays($day, true))->toBe(2);
+
+    $day = new DateTime('31-01-2020');
+    expect(CalendarService::getEmptyEndDays($day, true))->toBe(0);
+});
+
 it('throws Exception when date doesnt exists', function() {
     CalendarService::getValidDate('2021-12-32');
 })->throws(\Exception::class);
@@ -121,4 +155,13 @@ it('skips invalid dateTime when parse to date', function () {
 it('returns empty array when there is no datetimes', function () {
     $parsed = CalendarService::parseArrayValuesToDate([]);
     expect($parsed)->toEqual([]);
+});
+
+it('returns full weeks counter', function () {
+    expect(CalendarService::getFullWeeksCounter(new \DateTime('01-01-2022')))->toBe(4);
+    expect(CalendarService::getFullWeeksCounter(new \DateTime('01-02-2022')))->toBe(3);
+    expect(CalendarService::getFullWeeksCounter(new \DateTime('01-05-2022')))->toBe(4);
+    expect(CalendarService::getFullWeeksCounter(new \DateTime('01-08-2022')))->toBe(4);
+    expect(CalendarService::getFullWeeksCounter(new \DateTime('01-11-2022')))->toBe(3);
+    expect(CalendarService::getFullWeeksCounter(new \DateTime('01-05-2020')))->toBe(4);
 });

@@ -18,7 +18,7 @@ it('returns valid array keys in month instance', function() {
     $instance = CalendarService::getMonthInstance();
 
     expect($instance)
-        ->toHaveKeys(['days', 'emptyBegin', 'emptyEnd', 'endTo', 'firstDay', 'isTodayVisible', 'lastDay', 'lastMonth', 'lastMonthCode', 'monthCode', 'monthName', 'nextMonth', 'nextMonthCode', 'startFrom', 'today', 'todayDay', 'year', 'monthNumber', 'daysInstances']);
+        ->toHaveKeys(['days', 'emptyBegin', 'emptyEnd', 'emptyWorkDaysBegin', 'emptyWorkDaysEnd', 'endTo', 'firstDay', 'isTodayVisible', 'lastDay', 'lastMonth', 'lastMonthCode', 'monthCode', 'monthName', 'nextMonth', 'nextMonthCode', 'startFrom', 'today', 'todayDay', 'year', 'monthNumber', 'daysInstances', 'fullWeeksCounter']);
 });
 
 it('returns valid days instances in month instance', function() {
