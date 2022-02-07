@@ -28,6 +28,8 @@ class CalendarService
             'days' => (int)(clone $date)->format('t'),
             'emptyBegin' => self::getEmptyBeginDays(clone $firstDay),
             'emptyEnd' => self::getEmptyEndDays(clone $lastDay),
+            'emptyWorkDaysBegin' => self::getEmptyBeginDays(clone $firstDay, true),
+            'emptyWorkDaysEnd' => self::getEmptyEndDays(clone $lastDay, true),
             'monthName' => self::$monthNames[(clone $firstDay)->format('n')],
             'startFrom' => (clone $firstDay)->format('Y-m-d'),
             'endTo' => (clone $lastDay)->format('Y-m-d'),
@@ -45,7 +47,8 @@ class CalendarService
             'lastDayDateTime' => (clone $lastDay)->format('Y-m-d 23:59:59'),
             'monthCode' => (clone $firstDay)->format('Y-m'),
             'monthNumber' => (clone $firstDay)->format('m'),
-            'daysInstances' => self::getDaysInstances($firstDay, $lastDay)
+            'fullWeeksCounter' => self::getFullWeeksCounter($firstDay),
+            'daysInstances' => self::getDaysInstances($firstDay, $lastDay),
         ];
     }
 
@@ -87,24 +90,55 @@ class CalendarService
         ];
     }
 
-    public static function getEmptyBeginDays(\DateTime $firstDay) {
-        $weekDay = $firstDay->format('w');
+    public static function getEmptyBeginDays(\DateTime $firstDay, $onlyWorkDays = false) {
+        $weekDay = $firstDay->format('N');
 
-        if($weekDay == 0) {
-            return 6;
-        } else {
-            return $weekDay-1;
+        if($onlyWorkDays) {
+            if($weekDay < 6) {
+                return $weekDay-1;
+            }
+
+            return 5;
         }
+
+
+        return $weekDay-1;
     }
 
-    public static function getEmptyEndDays(\DateTime $lastDay) {
-        $weekDay = $lastDay->format('w');
+    public static function getEmptyEndDays(\DateTime $lastDay, $onlyWorkDays = false) {
+        $weekDay = $lastDay->format('N');
 
-        if($weekDay > 0) {
+        if($onlyWorkDays) {
+            if($weekDay < 6) {
+                return 5-$weekDay;
+            }
+
+            return 0;
+        }
+
+        if($weekDay < 7) {
             return 7-$weekDay;
         }
 
         return 0;
+    }
+
+    public static function getFullWeeksCounter(\DateTime $date) {
+        $firstDay = (clone $date)->modify('first day of this month');
+        $lastDay = (clone $date)->modify('last day of this month');
+        $allDays = (clone $lastDay)->format('j');
+
+        if($lastDay->format('N') == 7) {
+            $allDays = (int)$allDays + 1;
+        }
+
+        $startDay = 1;
+
+        if($firstDay->format('N') > 1) {
+            $startDay = $startDay + (7 - $firstDay->format('N') + 1);
+        }
+
+        return (int)floor(($allDays - $startDay) / 7);
     }
 
     public static $dayNames = [
