@@ -57,4 +57,32 @@ class WorkCalendarService
 
         return $notSundayHolidays;
     }
+
+    /**
+     * @throws \Exception
+     */
+    public static function hasNightShiftHours(array $array)
+    {
+        $range = array_values($array);
+        $date = (new \DateTime())->format('Y-m-d');
+
+        $startTime = new \DateTime($date . ' ' . $range[0]);
+        $stopTime = new \DateTime($date . ' ' . $range[1]);
+
+        $startShift = (new \DateTime())->modify('-1 day')->setTime(22, 0);
+        $stopShift = (new \DateTime())->setTime(6, 0);
+
+        if($startTime > $stopTime) {
+            $newDate = (new \DateTime('-1 day'))->format('Y-m-d');
+            $startTime = new \DateTime($newDate . ' ' . $range[0]);
+        }
+
+//        dump($startTime, $stopTime, $startShift, $stopShift);
+//        dump($startShift >= $startTime);
+//        dump($startShift <= $stopTime);
+//        dump($stopShift >= $startTime);
+//        dump($stopShift <= $stopTime);
+
+        return (($startShift >= $startTime && $startShift <= $stopTime) || ($stopShift > $startTime && $stopShift <= $stopTime));
+    }
 }
