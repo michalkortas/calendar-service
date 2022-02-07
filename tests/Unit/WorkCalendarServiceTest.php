@@ -73,7 +73,7 @@ it('checks night shift hours', function() {
     expect(WorkCalendarService::hasNightShiftHours([
         'start' => '23:00:00',
         'stop' => '23:00:00',
-    ]))->toBeFalse();
+    ]))->toBeTrue();
 
     expect(WorkCalendarService::hasNightShiftHours([
         'start' => '06:00:00',
@@ -86,7 +86,18 @@ it('checks night shift hours', function() {
     ]))->toBeFalse();
 
     expect(WorkCalendarService::hasNightShiftHours([
-        'start' => '06:00:00',
-        'stop' => '22:00:00',
-    ]))->toBeFalse();
+        "start" => "02:00:00",
+        "stop" => "05:45:00"
+      ]))->toBeTrue();
+
+    expect(WorkCalendarService::hasNightShiftHours([
+        "start" => "02:00:00",
+        "stop" => "06:00:00"
+    ]))->toBeTrue();
+
+    expect(WorkCalendarService::hasNightShiftHours([
+        "start" => "22:30:00",
+        "stop" => "23:30:00"
+    ]))->toBeTrue();
+
 });

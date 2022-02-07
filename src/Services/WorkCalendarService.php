@@ -64,10 +64,19 @@ class WorkCalendarService
     public static function hasNightShiftHours(array $array)
     {
         $range = array_values($array);
+
+        $startTimeHour = explode(':', $range[0])[0];
+        $stopTimeHour = explode(':', $range[1])[0];
+
         $date = (new \DateTime())->format('Y-m-d');
+
+        if($startTimeHour >= 22 && $stopTimeHour >= 22 ) {
+            $date = (new \DateTime('-1 day'))->format('Y-m-d');
+        }
 
         $startTime = new \DateTime($date . ' ' . $range[0]);
         $stopTime = new \DateTime($date . ' ' . $range[1]);
+
 
         $startShift = (new \DateTime())->modify('-1 day')->setTime(22, 0);
         $stopShift = (new \DateTime())->setTime(6, 0);
@@ -77,12 +86,10 @@ class WorkCalendarService
             $startTime = new \DateTime($newDate . ' ' . $range[0]);
         }
 
-//        dump($startTime, $stopTime, $startShift, $stopShift);
-//        dump($startShift >= $startTime);
-//        dump($startShift <= $stopTime);
-//        dump($stopShift >= $startTime);
-//        dump($stopShift <= $stopTime);
-
-        return (($startShift >= $startTime && $startShift <= $stopTime) || ($stopShift > $startTime && $stopShift <= $stopTime));
+        return (($startShift >= $startTime && $startShift <= $stopTime) ||
+            ($stopShift > $startTime && $stopShift <= $stopTime) ||
+            ($startTime >= $startShift && $startTime < $stopShift) ||
+            ($stopTime >= $startShift && $stopTime <= $stopShift)
+        );
     }
 }
