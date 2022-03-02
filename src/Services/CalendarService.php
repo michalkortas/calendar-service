@@ -93,7 +93,7 @@ class CalendarService
             'lastDayDateTime' => (clone $lastDay)->format('Y-m-d 23:59:59'),
             'weekCode' => (clone $firstDay)->format('Y-m'),
             'weekNumber' => (clone $firstDay)->format('W'),
-            'daysInstances' => self::getDaysInstances($firstDay, $lastDay),
+            'daysInstances' => self::getDaysInstances($firstDay, $lastDay, 'd-m'),
         ];
     }
 
@@ -168,7 +168,8 @@ class CalendarService
         return 0;
     }
 
-    public static function getFullWeeksCounter(\DateTime $date) {
+    public static function getFullWeeksCounter(\DateTime $date): int
+    {
         $firstDay = (clone $date)->modify('first day of this month');
         $lastDay = (clone $date)->modify('last day of this month');
         $allDays = (clone $lastDay)->format('j');
@@ -281,7 +282,7 @@ class CalendarService
         return $dates;
     }
 
-    private static function getDaysInstances(DateTime $firstDay, DateTime $lastDay)
+    private static function getDaysInstances(DateTime $firstDay, DateTime $lastDay, string $arrayCodeformat = 'j'): array
     {
         $days = [];
 
@@ -293,7 +294,7 @@ class CalendarService
 
         foreach ($period as $date) {
             $day = new \DateTime((clone $date)->format('Y-m-d'));
-            $days[(clone $date)->format('j')] = self::getDayInstance($day);
+            $days[(clone $date)->format($arrayCodeformat)] = self::getDayInstance($day);
         }
 
         return $days;
