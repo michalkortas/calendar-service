@@ -2,6 +2,13 @@
 
 use michalkortas\CalendarService\Services\CalendarService;
 
+it('returns week instance', function() {
+    $instance = CalendarService::getWeekInstance();
+
+    expect($instance)
+        ->toHaveKeys(['days', 'nextWeek', 'lastWeek']);
+});
+
 it('returns current month instance if date is not provided', function() {
     $instance = CalendarService::getMonthInstance();
 

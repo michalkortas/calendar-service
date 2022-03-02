@@ -52,6 +52,51 @@ class CalendarService
         ];
     }
 
+    public static function getWeekInstance(\DateTime $date = null): array
+    {
+        if($date === null) {
+            $date = new \DateTime();
+        }
+
+        $today = new \DateTime();
+
+        $dayCode = (clone $date)->format('N');
+        $currentDayCode = (clone $date)->format('N');
+
+        $toMonday = $dayCode - 1;
+        $toCurrentMonday = $currentDayCode - 1;
+        $toSunday = 7 - $dayCode;
+
+        $firstDayTodayWeek = (clone $today)->modify("-{$toCurrentMonday} day");
+
+        $firstDay = (clone $date)->modify("-{$toMonday} day");
+        $lastDay = (clone $date)->modify("+{$toSunday} day");
+
+        $lastWeek = (clone $date)->modify("-{$toMonday} day")->modify('-7 days');
+        $nextWeek = (clone $date)->modify("+{$toSunday} day")->modify('+1 days');;
+
+        return [
+            'days' => 7,
+            'startFrom' => (clone $firstDay)->format('Y-m-d'),
+            'endTo' => (clone $lastDay)->format('Y-m-d'),
+            'year' => (int)(clone $firstDay)->format('Y'),
+            'today' => (clone $today)->format('Y-m-d'),
+            'todayDay' => (clone $today)->format('j'),
+            'isTodayVisible' => (clone $firstDay)->format('Y-m-d') === (clone $firstDayTodayWeek)->format('Y-m-d'),
+            'nextWeek' => (clone $nextWeek)->format('Y-m-d'),
+            'nextWeekCode' => (clone $nextWeek)->format('Y-m'),
+            'lastWeek' => (clone $lastWeek)->format('Y-m-d'),
+            'lastWeekCode' => (clone $lastWeek)->format('Y-m'),
+            'firstDay' => (clone $firstDay)->format('Y-m-d'),
+            'lastDay' => (clone $lastDay)->format('Y-m-d'),
+            'firstDayDateTime' => (clone $firstDay)->format('Y-m-d 00:00:00'),
+            'lastDayDateTime' => (clone $lastDay)->format('Y-m-d 23:59:59'),
+            'weekCode' => (clone $firstDay)->format('Y-m'),
+            'weekNumber' => (clone $firstDay)->format('W'),
+            'daysInstances' => self::getDaysInstances($firstDay, $lastDay),
+        ];
+    }
+
     public static function getDayInstance(\DateTime $date = null): array
     {
         if($date === null) {
