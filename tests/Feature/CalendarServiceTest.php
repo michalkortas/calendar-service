@@ -5,6 +5,8 @@ use michalkortas\CalendarService\Services\CalendarService;
 it('returns week instance', function() {
     $instance = CalendarService::getWeekInstance();
 
+    dump($instance);
+
     expect($instance)
         ->toHaveKeys(['days', 'nextWeek', 'lastWeek']);
 });
