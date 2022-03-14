@@ -72,6 +72,10 @@ class CalendarEvent
      * @var false|mixed
      */
     public $is_all_day;
+    /**
+     * @var int|mixed
+     */
+    public $order;
 
     public function __construct(
         $from = null,
@@ -88,7 +92,8 @@ class CalendarEvent
         $uniqueId = null,
         $createdAt = null,
         $origin = null,
-        $isAllDay = false
+        $isAllDay = false,
+        $order = 0
     )
     {
         $this->title = $title;
@@ -108,5 +113,6 @@ class CalendarEvent
         $this->created_at = $createdAt;
         $this->origin = $origin;
         $this->is_all_day = $isAllDay;
+        $this->order = $order;
     }
 }
