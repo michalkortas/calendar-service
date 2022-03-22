@@ -127,6 +127,8 @@ class CalendarService
             'weekDayNumber' => (clone $date)->format('N'),
             'startFrom' => (clone $date)->setTime(0, 0)->format('Y-m-d H:i:s'),
             'endTo' => (clone $date)->setTime(23, 59, 59)->format('Y-m-d H:i:s'),
+            'firstDayDateTime' => (clone $date)->format('Y-m-d 00:00:00'),
+            'lastDayDateTime' => (clone $date)->format('Y-m-d 23:59:59'),
             'dayNumber' => (clone $date)->format('d'),
             'isWorkingDay' => HolidayService::isWorkingDay($date),
             'isSaturday' => HolidayService::isSaturday($date),
