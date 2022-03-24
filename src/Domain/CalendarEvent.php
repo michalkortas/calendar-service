@@ -76,6 +76,10 @@ class CalendarEvent
      * @var int|mixed
      */
     public $order;
+    /**
+     * @var mixed|string
+     */
+    public $initials;
 
     public function __construct(
         $from = null,
@@ -93,7 +97,8 @@ class CalendarEvent
         $createdAt = null,
         $origin = null,
         $isAllDay = false,
-        $order = 0
+        $order = 0,
+        $initials = ''
     )
     {
         $this->title = $title;
@@ -114,5 +119,6 @@ class CalendarEvent
         $this->origin = $origin;
         $this->is_all_day = $isAllDay;
         $this->order = $order;
+        $this->initials = $initials;
     }
 }
