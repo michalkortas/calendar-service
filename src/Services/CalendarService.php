@@ -21,8 +21,8 @@ class CalendarService
         $firstDay = (clone $date)->modify('first day of this month');
         $lastDay = (clone $date)->modify('last day of this month');
 
-        $nextMonth = (clone $date)->modify('next month');
-        $lastMonth = (clone $date)->modify('last month');
+        $nextMonth = (clone $date)->modify('first day of next month');
+        $lastMonth = (clone $date)->modify('first day of last month');
 
         return [
             'days' => (int)(clone $date)->format('t'),
