@@ -72,6 +72,10 @@ class CalendarEvent
      * @var false|mixed
      */
     public $is_all_day;
+    
+    public $is_todo;
+    
+    public $is_completed;
     /**
      * @var int|mixed
      */
@@ -98,7 +102,9 @@ class CalendarEvent
         $origin = null,
         $isAllDay = false,
         $order = 0,
-        $initials = ''
+        $initials = '',
+        $isTodo = false,
+        $isCompleted = false
     )
     {
         $this->title = $title;
@@ -120,5 +126,7 @@ class CalendarEvent
         $this->is_all_day = $isAllDay;
         $this->order = $order;
         $this->initials = $initials;
+        $this->is_todo = $isTodo;
+        $this->is_completed = $isCompleted;
     }
 }
