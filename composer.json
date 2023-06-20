@@ -21,5 +21,10 @@
     },
   "require": {
     "ext-calendar": "*"
-  }
+  },
+    "config": {
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
+    }
 }

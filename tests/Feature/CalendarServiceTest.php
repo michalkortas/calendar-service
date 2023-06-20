@@ -40,3 +40,23 @@ it('returns valid day keys in day instance', function() {
 
     expect($instance)->toHaveKeys(['dayName', 'weekNumber', 'weekDayNumber', 'nextName', 'lastName', 'year', 'today', 'todayDay', 'nextDay', 'currentDay', 'lastDay', 'nextDayCode', 'currentDayCode', 'lastDayCode', 'monthCode', 'dayCode', 'startFrom', 'endTo', 'isWorkingDay', 'isSaturday', 'isSunday', 'isHoliday']);
 });
+
+test('group dates', function () {
+    $dates = ["2023-06-19", "2023-06-21", "2023-06-23", "2023-06-23", "2023-06-24", "2023-06-18"];
+
+    $sortedAndGroupedDates = CalendarService::groupDates($dates);
+
+    expect($sortedAndGroupedDates)->toBe([
+        0 => [
+           0 => "2023-06-18",
+           1 => "2023-06-19",
+        ],
+        1 => [
+           0 => "2023-06-21",
+        ] ,
+        2 => [
+           0 => "2023-06-23",
+           1 => "2023-06-24",
+        ]
+    ]);
+});

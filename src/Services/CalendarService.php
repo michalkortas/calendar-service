@@ -285,6 +285,33 @@ class CalendarService
         return $dates;
     }
 
+    public static function groupDates(array $dates): array {
+        sort($dates);
+
+        $result = array();
+        $currentGroup = array();
+
+        $lastDate = null;
+
+        foreach ($dates as $date) {
+            if($lastDate === null || (strtotime($date) > strtotime($lastDate))) {
+                if (empty($currentGroup) || strtotime($date) - strtotime(end($currentGroup)) <= 86400) {
+                    $currentGroup[] = $date;
+                } else {
+                    $result[] = $currentGroup;
+                    $currentGroup = array($date);
+                }
+            }
+
+            $lastDate = $date;
+        }
+
+        $result[] = $currentGroup;
+
+        return $result;
+
+    }
+
     private static function getDaysInstances(DateTime $firstDay, DateTime $lastDay): array
     {
         $days = [];
