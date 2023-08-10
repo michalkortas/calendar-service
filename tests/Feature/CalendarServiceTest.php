@@ -41,7 +41,7 @@ it('returns valid day keys in day instance', function() {
     expect($instance)->toHaveKeys(['dayName', 'weekNumber', 'weekDayNumber', 'nextName', 'lastName', 'year', 'today', 'todayDay', 'nextDay', 'currentDay', 'lastDay', 'nextDayCode', 'currentDayCode', 'lastDayCode', 'monthCode', 'dayCode', 'startFrom', 'endTo', 'isWorkingDay', 'isSaturday', 'isSunday', 'isHoliday']);
 });
 
-test('group dates', function () {
+test('group dates from the same month', function () {
     $dates = ["2023-06-19", "2023-06-21", "2023-06-23", "2023-06-23", "2023-06-24", "2023-06-18"];
 
     $sortedAndGroupedDates = CalendarService::groupDates($dates);
@@ -57,6 +57,48 @@ test('group dates', function () {
         2 => [
            0 => "2023-06-23",
            1 => "2023-06-24",
+        ]
+    ]);
+});
+
+test('group dates from different months without splitting', function () {
+    $dates = ["2023-07-30", "2023-08-01", "2023-07-31", "2023-08-02", "2023-08-03", "2023-08-23", "2023-08-24"];
+
+    $sortedAndGroupedDates = CalendarService::groupDates($dates);
+
+    expect($sortedAndGroupedDates)->toBe([
+        0 => [
+           0 => "2023-07-30",
+           1 => "2023-07-31",
+           2 => "2023-08-01",
+           3 => "2023-08-02",
+           4 => "2023-08-03",
+        ] ,
+        1 => [
+           0 => "2023-08-23",
+           1 => "2023-08-24",
+        ]
+    ]);
+});
+
+test('group dates from different months with splitting', function () {
+    $dates = ["2023-07-30", "2023-08-01", "2023-07-31", "2023-08-02", "2023-08-03", "2023-08-23", "2023-08-24"];
+
+    $sortedAndGroupedDates = CalendarService::groupDates($dates, true);
+
+    expect($sortedAndGroupedDates)->toBe([
+        0 => [
+           0 => "2023-07-30",
+           1 => "2023-07-31",
+        ],
+        1 => [
+           0 => "2023-08-01",
+           1 => "2023-08-02",
+           2 => "2023-08-03",
+        ] ,
+        2 => [
+           0 => "2023-08-23",
+           1 => "2023-08-24",
         ]
     ]);
 });

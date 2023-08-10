@@ -285,18 +285,34 @@ class CalendarService
         return $dates;
     }
 
-    public static function groupDates(array $dates): array {
+    public static function groupDates(array $dates, bool $splitMonths = false): array {
         sort($dates);
 
         $result = array();
         $currentGroup = array();
 
         $lastDate = null;
+        $lastMonth = null;
 
         foreach ($dates as $date) {
-            if($lastDate === null || (strtotime($date) > strtotime($lastDate))) {
-                if (empty($currentGroup) || strtotime($date) - strtotime(end($currentGroup)) <= 86400) {
-                    $currentGroup[] = $date;
+            if ($lastDate === null || (strtotime($date) > strtotime($lastDate))) {
+                $addToCurrentGroup = true;
+
+                if ($splitMonths && $lastMonth !== null) {
+                    $currentMonth = date('Y-m', strtotime($date));
+                    if ($currentMonth !== $lastMonth) {
+                        $addToCurrentGroup = false;
+                        $lastMonth = $currentMonth;
+                    }
+                }
+
+                if ($addToCurrentGroup) {
+                    if (empty($currentGroup) || strtotime($date) - strtotime(end($currentGroup)) <= 86400) {
+                        $currentGroup[] = $date;
+                    } else {
+                        $result[] = $currentGroup;
+                        $currentGroup = array($date);
+                    }
                 } else {
                     $result[] = $currentGroup;
                     $currentGroup = array($date);
@@ -304,12 +320,14 @@ class CalendarService
             }
 
             $lastDate = $date;
+            if ($splitMonths) {
+                $lastMonth = date('Y-m', strtotime($date));
+            }
         }
 
         $result[] = $currentGroup;
 
         return $result;
-
     }
 
     private static function getDaysInstances(DateTime $firstDay, DateTime $lastDay): array
