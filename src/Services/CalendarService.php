@@ -134,6 +134,7 @@ class CalendarService
             'isSaturday' => HolidayService::isSaturday($date),
             'isSunday' => HolidayService::isSunday($date),
             'isHoliday' => HolidayService::isHoliday($date),
+            'isToday' => $today->format('Y-m-d') === $date->format('Y-m-d'),
             'holidayName' => HolidayService::getHoliday($date),
         ];
     }
