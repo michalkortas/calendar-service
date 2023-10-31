@@ -36,6 +36,8 @@ class CalendarService
             'startFrom' => (clone $firstDay)->format('Y-m-d'),
             'endTo' => (clone $lastDay)->format('Y-m-d'),
             'year' => (int)(clone $firstDay)->format('Y'),
+            'lastMonthYear' => (int)(clone $lastMonth)->format('Y'),
+            'nextMonthYear' => (int)(clone $nextMonth)->format('Y'),
             'today' => (clone $today)->format('Y-m-d'),
             'todayDay' => (clone $today)->format('j'),
             'isTodayVisible' => (clone $firstDay)->format('Y-m-d') === (clone $firstDayTodayMonth)->format('Y-m-d'),
