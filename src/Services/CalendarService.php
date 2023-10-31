@@ -31,6 +31,8 @@ class CalendarService
             'emptyWorkDaysBegin' => self::getEmptyBeginDays(clone $firstDay, true),
             'emptyWorkDaysEnd' => self::getEmptyEndDays(clone $lastDay, true),
             'monthName' => self::$monthNames[(clone $firstDay)->format('n')],
+            'lastMonthName' => self::$monthNames[(clone $lastMonth)->format('n')],
+            'nextMonthName' => self::$monthNames[(clone $nextMonth)->format('n')],
             'startFrom' => (clone $firstDay)->format('Y-m-d'),
             'endTo' => (clone $lastDay)->format('Y-m-d'),
             'year' => (int)(clone $firstDay)->format('Y'),
