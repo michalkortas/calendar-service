@@ -54,14 +54,30 @@ test('count working days during an ordinary week without start day', function ()
     expect(HolidayService::countWorkingDays($from, $to, false))->toBe(4);
 });
 
-test('count working days during christmas week', function () {
+test('count working days during christmas week before eve-holiday', function () {
     $from = new DateTime('2019-12-23');
     $to = new DateTime('2019-12-29');
     expect(HolidayService::countWorkingDays($from, $to))->toBe(3);
+});
+
+test('count working days during christmas week after eve-holiday', function () {
+    $from = new DateTime('2025-12-22');
+    $to = new DateTime('2025-12-28');
+    expect(HolidayService::countWorkingDays($from, $to))->toBe(2);
 });
 
 test('count working days during easter weeks', function () {
     $from = new DateTime('2021-03-29');
     $to = new DateTime('2021-04-11');
     expect(HolidayService::countWorkingDays($from, $to))->toBe(9);
+});
+
+test('is not working day on christmas eve', function () {
+    $day = new DateTime('2025-12-24');
+    expect(HolidayService::isWorkingDay($day))->toBeFalse();
+});
+
+test('is not working day on christmas eve before eve-holiday', function () {
+    $day = new DateTime('2024-12-24');
+    expect(HolidayService::isWorkingDay($day))->toBeTrue();
 });

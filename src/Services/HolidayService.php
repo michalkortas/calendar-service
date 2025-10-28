@@ -22,6 +22,10 @@ class HolidayService
             '12-26' => 'Boże Narodzenie'
         ];
 
+        if ($year >= 2025) {
+            $constHolidays['12-24'] = 'Wigilia Bożego Narodzenia';
+        }
+
         $spring = (new \DateTime($year . '-03-21'))->setTime(0,0);
 
         $daysToEasterAfterSpring = easter_days($year);
