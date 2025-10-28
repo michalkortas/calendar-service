@@ -26,8 +26,11 @@ class RecurringService
         }
     }
 
-    public static function getValidInterval(int $daysInterval) : int {
-        if($daysInterval < 0) {
+    public static function getValidInterval($daysInterval): int
+    {
+        $daysInterval = (int) $daysInterval;
+
+        if ($daysInterval < 0) {
             return 0;
         }
 

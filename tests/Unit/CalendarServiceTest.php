@@ -158,10 +158,10 @@ it('returns empty array when there is no datetimes', function () {
 });
 
 it('returns full weeks counter', function () {
-    expect(CalendarService::getFullWeeksCounter(new \DateTime('01-01-2022')))->toBe(4);
-    expect(CalendarService::getFullWeeksCounter(new \DateTime('01-02-2022')))->toBe(3);
-    expect(CalendarService::getFullWeeksCounter(new \DateTime('01-05-2022')))->toBe(4);
-    expect(CalendarService::getFullWeeksCounter(new \DateTime('01-08-2022')))->toBe(4);
-    expect(CalendarService::getFullWeeksCounter(new \DateTime('01-11-2022')))->toBe(3);
-    expect(CalendarService::getFullWeeksCounter(new \DateTime('01-05-2020')))->toBe(4);
+    expect(CalendarService::getFullWeeksCounter(new \DateTime('01-01-2022')))->toBe(4)
+        ->and(CalendarService::getFullWeeksCounter(new \DateTime('01-02-2022')))->toBe(3)
+        ->and(CalendarService::getFullWeeksCounter(new \DateTime('01-05-2022')))->toBe(4)
+        ->and(CalendarService::getFullWeeksCounter(new \DateTime('01-08-2022')))->toBe(4)
+        ->and(CalendarService::getFullWeeksCounter(new \DateTime('01-11-2022')))->toBe(3)
+        ->and(CalendarService::getFullWeeksCounter(new \DateTime('01-05-2020')))->toBe(4);
 });
