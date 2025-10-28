@@ -21,7 +21,7 @@ it('returns array with recurring', function () {
 test('it recurring every 2 months expect this month', function () {
     $eventFrom = new DateTime('wednesday this week');
     $eventTo = (new DateTime('wednesday this week'))->modify('+2 hours');
-    $stopRecurring = (new DateTime('wednesday this week'))->modify('+6 months');
+    $stopRecurring = (new DateTime('wednesday this week'))->modify('+6 months +2 days');
 
     $event = new CalendarEvent(
         $eventFrom->format('Y-m-d H:i'),
@@ -36,7 +36,7 @@ test('it recurring every 2 months expect this month', function () {
 test('it recurring every month expect this month', function () {
     $eventFrom = new DateTime('wednesday this week');
     $eventTo = (new DateTime('wednesday this week'))->modify('+2 hours');
-    $stopRecurring = (new DateTime('wednesday this week'))->modify('+8 months');
+    $stopRecurring = (new DateTime('wednesday this week'))->modify('+8 months +2 days');
 
     $event = new CalendarEvent(
         $eventFrom->format('Y-m-d H:i'),
